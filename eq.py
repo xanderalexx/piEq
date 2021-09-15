@@ -32,7 +32,7 @@ g.setup(button, g.IN)
 
 latitude = "35.040554";
 longitude = "-117.138306";
-maxradius = "251.3414";
+maxradius = "151.3414";
 date = today.strftime("%y-%m-%d")
 url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=" + latitude + "&longitude=" + longitude + "&maxradiuskm=" + maxradius + "&orderby=time&limit=1" + "&starttime=" + date
 
@@ -105,7 +105,10 @@ while True:
             A = KThread(target=neweq(round(mag, 1)))
             B = 1
         else:
-            A.kill()
+            try:
+                A.kill()
+            except:
+                continue
         A.start()
         title = data_['title']
         print(str(mag) + ": " + title + ", ")
